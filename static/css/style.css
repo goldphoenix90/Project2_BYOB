@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+body {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../images/brewery.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    font-family: monospace;
+}
+
+.navbar-default {
+    background-color: transparent;
+}
+
+nav .navbar-nav a {
+    color: white !important;
+    font-size: 20px;
+    font-family: "Roboto", sans-serif;
+    margin: 10px;
+}
+
+nav .navbar-nav ul:hover {
+    color: solid white;
+}
+
+.dropdown-menu {
+    background-color: transparent !important;
+    
+}
+
+.dropdown-menu a:hover {
+    background-color: transparent !important;
+}
+
+.hero-logo {
+    margin-top: 8px;
+    margin-left: 450px;
+    width: 375px;
+    height: 330px;
+   
+}
+
+
+/* .hero-banner {
+    position: absolute;
+    width: 1200px;
+    margin-left: 0;
+    margin-top: 100px;
+}
+
+.hero-banner h1 {
+    color: gold;
+    text-transform: uppercase;
+    font-size: 200px;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 245px;
+
+}
+
+h2 {
+    color: white;
+    font-size: 70px;
+    text-align: center;
+    margin-left: 245px;
+} */
+
+.search-box {
+    position: absolute;
+    margin-top: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45.5%,160%);
+    height: 40px;
+    padding: 25px;
+    border-radius: 40px;
+    background: rgba(0,0,0,0);
+    
+}
+
+.search-text {
+    position: relative;
+    font-size: 13px;
+    height: 30px;
+    padding: 20px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    width: 220px;
+    opacity: .9;
+}
+
+.search-btn {
+    padding: 10px;
+    text-align: center;
+    height: 42px;
+    width: 140px;
+    background: #ffeb3b;
+    border: none;
+    color: #000;
+    border-radius: 25px;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    opacity: .9;
+}
+
+.search-btn:hover {
+    background: #ffc107;
+    cursor: pointer;
+}
+
+
+.item {
+    width: 1200px;
+    height: 100px;
+    margin: 50px auto;
+    padding-top: 50px;
+    background:transparent;
+    text-align: center;
+    color: white;
+    font-size: 1em;
+}
+
+
+td {
+    color: gold;
+ }
+
+ h3 {
+     text-align: center
+ }

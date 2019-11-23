@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>BYOB</title>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bg-transparent">
+                <a class="navbar-brand"><img class="logo" src="{{ url_for('static', filename='images/beer.png') }}"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for( 'index' ) }}">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Beer
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url_for( 'categories' ) }}">Categories</a>
+                       
+                        </div>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for( 'categories' ) }}">Beer Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for( 'brewmap' ) }}">Brewery Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for( 'brewguide' ) }}">Beer Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for( 'about' ) }}">About Us</a>
+                    </li>
+                    
+                    </ul>
+                </div>
+            </nav>
+    
+        <!--END OF NAVBAR-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="pie"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div id="bubble"></div>
+                  </div>
+            </div>
+            <div class="row">
+                  
+                  
+           </div>
+           <div class="row">
+            
+            <div class="container">
+                    <div class="row margin-top-50">
+                      <div class="col-md-2">
+                        <aside class="filters">
+                          <div class="panel panel-default">
+                            <div class="panel-heading" style="color: gold">Filter Search</div>
+                            <div class="panel-body">
+                              <form>
+                                <div class="form-group" style="color: gold">
+                                  <ul class="list-group" id="filters">
+                                    <li class="filter list-group-item">
+                                      <label for="date">Enter a Category</label>
+                                      <input class="form-control" style= "background:gold" id="category" type="text" placeholder="Category">
+                                    </li>
+                                  </ul>
+                                </div>
+                                <button id="filter-btn" type="button" class="btn btn-default", style="color: orange">Filter Table</button>
+                              </form>
+                            </div>
+                          </div>
+                        </aside>
+                      </div>
+                    </div>
+                  </div>
+      </div>
+      
+<div class="row">
+<div class="col-md-12">
+<div id="table-area" class="">
+<table id="beer-table" class="table table-striped">
+  <thead>
+    <tr>
+      
+      <th class="table-head", style="color:gold">ABV</th>
+           <th class="table-head", style="color:gold">Beer Name</th>
+           <th class="table-head", style="color:gold">Brewery</th>
+           <th class="table-head", style="color:gold">Category</th>
+           <th class="table-head", style="color:gold">Style</th>
+           <!-- <th class="table-head", style="color:gold">Zipcode</th> -->
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+            
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="{{ url_for('static', filename='js/charts.js') }}"></script>  
+        <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+  </body>
+</html>
