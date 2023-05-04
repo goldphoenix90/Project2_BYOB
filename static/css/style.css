@@ -39,21 +39,27 @@ nav .navbar-nav ul:hover {
 }
 
 .hero-logo {
-    margin-top: 8px;
-    margin-left: 450px;
+    /* margin-top: 8px;
+    margin-left: 450px; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: 375px;
     height: 330px;
    
 }
 
 
-/* .hero-banner {
-    position: absolute;
+.hero-banner {
+    display: block;
+    /* position: absolute; */
     width: 1200px;
-    margin-left: 0;
-    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-left: 0;
+    margin-top: 100px; */
 }
-
+/* 
 .hero-banner h1 {
     color: gold;
     text-transform: uppercase;

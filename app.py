@@ -3,10 +3,9 @@ import os
 import pandas as pd
 import numpy as np
 
-import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -18,17 +17,25 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/beer.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///beer.sqlite"
 
 db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
 Base = automap_base()
+
+engine = create_engine("sqlite:///beer.sqlite")
 # reflect the tables
-Base.prepare(db.engine, reflect=True)
+# Base.prepare(db.engine, reflect=True)
+Base.prepare(autoload_with=engine)
 
 # Save references to each table
 samples = Base.classes.beer
+
+session = Session(engine)
+
+u1 = session.query(samples).first()
+print (type(u1.categories))
 
 
 @app.route("/landing")
@@ -61,28 +68,28 @@ def brewmap():
 def categories():
     return render_template("categories.html")
 
-@app.route("/sampleinfo")
-def sampleInfo():
-# Use Pandas to perform the sql query
-    stmt = db.session.query(samples).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
+# @app.route("/sampleinfo")
+# def sampleInfo():
+# # Use Pandas to perform the sql query
+#     stmt = db.session.query(samples).statement
+#     df = pd.read_sql_query(stmt, db.session.bind)
     
-    data = {
-        # donut will use beer category totals 
-        "category_labels": df.categories.tolist(),
-        "category_totals": df.groupby(["categories"])['name'].nunique().tolist(),
-        "beer_name":df.name.tolist(),
-        "abv": df.abv.tolist(),
-        "zip_code": df.code.tolist(),
-        "latitude": df.latitude.tolist(),
-        "longitude": df.longitude.tolist(),
-        "brewery_name": df.brewery_name.tolist(),
-        }
-    #data = df.groupby(["categories"])['name'].nunique().tolist()
-    return jsonify(data)
+#     data = {
+#         # donut will use beer category totals 
+#         "category_labels": df.categories.tolist(),
+#         "category_totals": df.groupby(["categories"])['name'].nunique().tolist(),
+#         "beer_name":df.name.tolist(),
+#         "abv": df.abv.tolist(),
+#         "zip_code": df.code.tolist(),
+#         "latitude": df.latitude.tolist(),
+#         "longitude": df.longitude.tolist(),
+#         "brewery_name": df.brewery_name.tolist(),
+#         }
+#     #data = df.groupby(["categories"])['name'].nunique().tolist()
+#     return jsonify(data)
 
-    # print(df)
-    # return jsonify(stmt)
+#     # print(df)
+#     # return jsonify(stmt)
 
 @app.route("/mapinfo")
 def mapInfo():
@@ -131,17 +138,21 @@ def mapInfo():
 @app.route("/beerinfo")
 def beerInfo():
 # Use Pandas to perform the sql query
+#    stmt = 'SELECT *'
+#    results = db.session.execute(text(stmt))
    # id,brewery_id,name,categories,style,abv,beer_description,brewery_name,address1,city,state,code,country,latitude,longitude
-   results = db.session.query(samples.name, samples.categories, samples.style, samples.abv, samples.brewery_name, samples.code, samples.latitude, samples.longitude).all()
+#    results = db.session.query(samples.name, samples.categories, samples.style, samples.abv, samples.brewery_name, samples.code, samples.latitude, samples.longitude).all()
+   results = session.query(samples).all()
+  
    # data = json.load(open(in_file))
    data = []
    for result in results:
        res_dict = {}
-       res_dict["beer_name"] = result[0]
-       res_dict["category_labels"] = result[1]
-       res_dict["style"] = result[2]
-       res_dict["abv"] = result[3]
-       res_dict["brewery_name"] = result[4]
+       res_dict["beer_name"] = result.name
+       res_dict["category_labels"] = result.categories
+       res_dict["style"] = result.style
+       res_dict["abv"] = result.abv
+       res_dict["brewery_name"] = result.brewery_name
     #    res_dict["zipcode"]=result[5]
      
       
